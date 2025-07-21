@@ -18,7 +18,7 @@ from sklearn.model_selection import train_test_split
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Activation, Dropout, Flatten, Dense, Input
 
-### Why I did? :
+### purpose:
 These are core libraries for image preprocessing, modeling (TensorFlow/Keras), and dataset handling (NumPy, sklearn).
 
 ### ✅ 2. Dataset Loading
@@ -46,7 +46,7 @@ for image_name in no_tumor_images + yes_tumor_images:
             dataset.append(np.array(img))
             labels.append(label)
 
-### Why I did?: 
+### purpose: 
 Standardizing input size improves training efficiency and model consistency.
 
 ## ✅ 3. Data Preprocessing
@@ -55,11 +55,11 @@ dataset = np.array(dataset)
 labels = np.array(labels)
 x_train, x_test, y_train, y_test = train_test_split(dataset, labels, test_size=0.2, random_state=0)
 
-# Normalize pixel values [0-255] ➝ [0-1]
+### Normalize pixel values [0-255] ➝ [0-1]
 x_train = normalize(x_train, axis=1)
 x_test = normalize(x_test, axis=1)
 
-### Why I did?: 
+### purpose: 
 Train/test split allows generalization testing. 
 Normalization improves convergence and stability.
 
@@ -75,7 +75,7 @@ model = Sequential([
     Dense(1), Activation('sigmoid')
 ])
 
-### Why I did?: 
+### purpose: 
 
 Three convolutional blocks extract spatial features.
 
@@ -87,7 +87,7 @@ Sigmoid used for binary output.
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
-### Why I did?:  
+### purpose:  
 Binary classification task requires binary loss. 
 Adam optimizer accelerates convergence.
 
@@ -100,7 +100,7 @@ history = model.fit(
     validation_split=0.1
 )
 
-### Why I did?: 
+### purpose: 
 
 Used validation_split to monitor overfitting.
 Batch size optimized for GPU memory.
@@ -117,7 +117,7 @@ Result: Achieved ~98% test accuracy, confirming generalization.
 model.save("brain_tumor_cnn_model.keras")
 model = load_model("brain_tumor_cnn_model.keras")
 
-### Why I did?: 
+### purpose: 
 Saved final model for reuse in deployment/inference.
 
 ## ✅ 9.Overfitting Detection
@@ -134,7 +134,7 @@ plt.plot(history.history['val_loss'], label='Val Loss')
 plt.legend(); plt.title("Loss")
 
 
-### Why I did?: 
+### purpose: 
 Captured training/validation loss and accuracy per epoch.
 Plotted using Matplotlib.
 Observation: Slight overfitting after epoch 6+ → prompted further regularization strategies.
@@ -156,7 +156,7 @@ datagen.fit(x_train)
 model.fit(datagen.flow(x_train, y_train, batch_size=16), epochs=10, validation_data=(x_test, y_test))
 
 
-### Why I did?: 
+### purpose: 
 Combat overfitting and improve generalization.
 
 ## ✅ 11. Confusion Matrix & Classification Metrics
@@ -167,7 +167,7 @@ y_pred = (model.predict(x_test) > 0.5).astype("int32")
 print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 
-### Why I did?: 
+### purpose: 
 Beyond accuracy, precision/recall ensure robustness in real-world diagnostics.
 
 ## ✅ 12. Model Inference Pipeline
@@ -182,7 +182,7 @@ def predict_image(image_path):
     confidence = prediction if prediction > 0.5 else 1 - prediction
     print(f"🧠 Prediction: {label} | ✅ Confidence: {confidence:.2f}")
 
-### Why I did?: 
+### purpose: 
 Modularized inference step to test on any real-world image.
 
 ### 🎯 What Accomplished
@@ -209,6 +209,7 @@ Output label + confidence ✅ Done
 ## 📄 License
 This project is licensed under the MIT License 
 
-## 🙋‍♂️ Author
+## 🙋‍♂️ Contact
+
 
 
