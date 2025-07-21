@@ -210,6 +210,7 @@ Output label + confidence ✅ Done
 This project is licensed under the MIT License 
 
 ## 🙋‍♂️ Contact
-
+📧 Gmail:[jayeshpardeshi161@gmail.com]
+📌 LinkedIn:[] 📌 Portfolio:[]
 
 
