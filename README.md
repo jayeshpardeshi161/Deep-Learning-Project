@@ -7,6 +7,7 @@ This project represents a practical implementation of a binary classification pi
 The goal of this project was to build a binary image classification model that predicts whether an MRI scan shows a tumor or no tumor.
 
 ## 🗂️ Project Workflow
+
 ### ✅ 1. Import Required Libraries
 
 import os, cv2
@@ -22,7 +23,6 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Activation, Dropout, F
 These are core libraries for image preprocessing, modeling (TensorFlow/Keras), and dataset handling (NumPy, sklearn).
 
 ### ✅ 2. Dataset Loading
-python
 
 image_directory = 'datasets/'
 no_tumor_images = os.listdir(image_directory + 'no/')
@@ -33,7 +33,7 @@ Loaded .jpg images from two folders: yes/ and no/.
 
 Assigned labels: 1 for tumor, 0 for no tumor.
 
-# Resizing all images to a uniform shape
+### Resizing all images to a uniform shape
 INPUT_SIZE = 64
 
 for image_name in no_tumor_images + yes_tumor_images:
@@ -50,8 +50,7 @@ for image_name in no_tumor_images + yes_tumor_images:
 ### purpose: 
 Standardizing input size improves training efficiency and model consistency.
 
-## ✅ 3. Data Preprocessing
-Python
+### ✅ 3. Data Preprocessing
 
 dataset = np.array(dataset)
 labels = np.array(labels)
@@ -65,8 +64,7 @@ x_test = normalize(x_test, axis=1)
 Train/test split allows generalization testing. 
 Normalization improves convergence and stability.
 
-## ✅ 4. Build CNN Model
-Python
+### ✅ 4. Build CNN Model
 
 model = Sequential([
     Input(shape=(INPUT_SIZE, INPUT_SIZE, 3)),
@@ -86,8 +84,8 @@ Dropout combats overfitting.
 
 Sigmoid used for binary output.
 
-## ✅ 5. Compile Model
-Python
+### ✅ 5. Compile Model
+
 
 model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
 
@@ -95,8 +93,8 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 Binary classification task requires binary loss. 
 Adam optimizer accelerates convergence.
 
-## ✅ 6. Train Model
-Python
+### ✅ 6. Train Model
+
 
 history = model.fit(
     x_train, y_train,
@@ -110,16 +108,14 @@ history = model.fit(
 Used validation_split to monitor overfitting.
 Batch size optimized for GPU memory.
 
-## ✅ 7. Model Evaluation
-Python
+### ✅ 7. Model Evaluation
 
 loss, accuracy = model.evaluate(x_test, y_test)
 print(f"Test Accuracy: {accuracy*100:.2f}%")
 
-Result: Achieved ~98% test accuracy, confirming generalization.
+## Result: Achieved ~98% test accuracy, confirming generalization.
 
-## ✅ 8. Model Saving & Reloading
-Python
+### ✅ 8. Model Saving & Reloading
 
 model.save("brain_tumor_cnn_model.keras")
 model = load_model("brain_tumor_cnn_model.keras")
@@ -127,7 +123,7 @@ model = load_model("brain_tumor_cnn_model.keras")
 ### purpose: 
 Saved final model for reuse in deployment/inference.
 
-## ✅ 9.Overfitting Detection
+### ✅ 9.Overfitting Detection
 Python
 
 import matplotlib.pyplot as plt
@@ -147,7 +143,7 @@ Captured training/validation loss and accuracy per epoch.
 Plotted using Matplotlib.
 Observation: Slight overfitting after epoch 6+ → prompted further regularization strategies.
 
-## ✅ 10.Data Augmentation
+### ✅ 10.Data Augmentation
 
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
@@ -160,14 +156,14 @@ datagen = ImageDataGenerator(
 )
 datagen.fit(x_train)
 
-# Re-train using augmented batches
+### Re-train using augmented batches
 model.fit(datagen.flow(x_train, y_train, batch_size=16), epochs=10, validation_data=(x_test, y_test))
 
 
 ### purpose: 
 Combat overfitting and improve generalization.
 
-## ✅ 11. Confusion Matrix & Classification Metrics
+### ✅ 11. Confusion Matrix & Classification Metrics
 
 from sklearn.metrics import classification_report, confusion_matrix
 
@@ -178,7 +174,7 @@ print(classification_report(y_test, y_pred))
 ### purpose: 
 Beyond accuracy, precision/recall ensure robustness in real-world diagnostics.
 
-## ✅ 12. Model Inference Pipeline
+### ✅ 12. Model Inference Pipeline
 
 def predict_image(image_path):
     img = cv2.imread(image_path)
