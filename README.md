@@ -57,7 +57,7 @@ dataset = np.array(dataset)
 labels = np.array(labels)
 x_train, x_test, y_train, y_test = train_test_split(dataset, labels, test_size=0.2, random_state=0)
 
-# Normalize pixel values [0-255] ➝ [0-1]
+### Normalize pixel values [0-255] ➝ [0-1]
 x_train = normalize(x_train, axis=1)
 x_test = normalize(x_test, axis=1)
 
