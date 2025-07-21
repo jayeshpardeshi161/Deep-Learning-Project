@@ -124,15 +124,14 @@ model = load_model("brain_tumor_cnn_model.keras")
 Saved final model for reuse in deployment/inference.
 
 ### ✅ 9.Overfitting Detection
-Python
 
 import matplotlib.pyplot as plt
-# Accuracy
+### Accuracy
 plt.plot(history.history['accuracy'], label='Train Accuracy')
 plt.plot(history.history['val_accuracy'], label='Val Accuracy')
 plt.legend(); plt.title("Accuracy")
 
-# Loss
+### Loss
 plt.plot(history.history['loss'], label='Train Loss')
 plt.plot(history.history['val_loss'], label='Val Loss')
 plt.legend(); plt.title("Loss")
