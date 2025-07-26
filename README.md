@@ -197,6 +197,10 @@ def predict_image(image_path):
 | F1-Score (Tumor)    | 0.99    |
 | F1-Score (No Tumor) | 0.97    |
 
+--
+
+                                                                                |
+
 
 ## 📄 License
 This project is licensed under the MIT License 
