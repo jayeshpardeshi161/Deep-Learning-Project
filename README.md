@@ -329,7 +329,6 @@ This validation split helped ensure that the model was not overfitting. The trai
 | **Python Code**                                                                         | **# Comments**                                                                                      |
 | --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | `history = model.fit(x_train, y_train, batch_size=16, epochs=10, validation_split=0.1)` | Trained the model with batch size 16, for 10 epochs, reserving 10% of training data for validation. |
-
 | **Output (Partial)**                                    | **# Comments**                                                                         |
 | ------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `Epoch 1/10 ─ accuracy: 0.7192 ─ val_accuracy: 0.8875`  | Model started learning; validation accuracy already high due to quality preprocessing. |
@@ -346,7 +345,6 @@ The model achieved a high accuracy, indicating strong generalization performance
 | ------------------------------------------------- | ------------------------------------------------------------- |
 | `loss, accuracy = model.evaluate(x_test, y_test)` | Evaluated the model's performance on the unseen test dataset. |
 | `print(f"Test Accuracy: {accuracy*100:.2f}%")`    | Converted the test accuracy to a readable percentage format.  |
-
 | **Output**                                                              | **# Comments**                                                                        |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `31/31 ━━━━━━━━━━━━━━━━ 0s 10ms/step - accuracy: 0.9714 - loss: 0.1158` | Model achieved \~97.14% test accuracy and low loss, indicating excellent performance. |
@@ -375,7 +373,6 @@ I also printed a confirmation message to ensure it was loaded without error.
 | `import numpy as np`                                | Re-imported NumPy for compatibility, especially if further operations are needed. |
 | `model = load_model("brain_tumor_cnn_model.keras")` | Loaded the trained model from the saved `.keras` file.                            |
 | `print("✅ Model loaded successfully!")`             | Confirmed that the model was successfully loaded from disk.                       |
-
 | **Output**                     | **# Comments**                                                         |
 | ------------------------------ | ---------------------------------------------------------------------- |
 | `✅ Model loaded successfully!` | Confirms that the saved model file was correctly restored into memory. |
@@ -391,7 +388,6 @@ I passed this dummy input through the model using predict() and interpreted the 
 | `prediction = model.predict(dummy_input)`                                                                                      | Generated a prediction score using the trained model.              |
 | `print("Prediction output:", prediction)`                                                                                      | Printed the raw probability score returned by the model.           |
 | `if prediction[0][0] > 0.5:`<br>    `print("Model Prediction: Tumor")`<br>`else:`<br>    `print("Model Prediction: No Tumor")` | Interpreted the output: values > 0.5 = "Tumor", else = "No Tumor". |
-
 | **Output**                        | **# Comments**                                           |
 | --------------------------------- | -------------------------------------------------------- |
 | `Prediction output: [[0.159118]]` | The prediction score indicates low confidence for tumor. |
@@ -410,7 +406,6 @@ These plots help identify issues like underfitting or overfitting by comparing m
 | `plt.subplot(1, 2, 1)`<br>`plt.plot(epochs, acc, 'b-', label='Training Accuracy')`<br>`plt.plot(epochs, val_acc, 'r-', label='Validation Accuracy')`<br>`plt.title('Training and Validation Accuracy')`<br>`plt.xlabel('Epochs')`<br>`plt.ylabel('Accuracy')`<br>`plt.legend()` | Plotted training vs validation accuracy to visually track performance.     |
 | `plt.subplot(1, 2, 2)`<br>`plt.plot(epochs, loss, 'b-', label='Training Loss')`<br>`plt.plot(epochs, val_loss, 'r-', label='Validation Loss')`<br>`plt.title('Training and Validation Loss')`<br>`plt.xlabel('Epochs')`<br>`plt.ylabel('Loss')`<br>`plt.legend()`               | Plotted training vs validation loss to detect overfitting patterns.        |
 | `plt.show()`                                                                                                                                                                                                                                                                    | Displayed the plots.                                                       |
-
 | **Output (Visual)**  | **# Comments**                                                                    |
 | -------------------- | --------------------------------------------------------------------------------- |
 | Accuracy/Loss Graphs | Helped visualize model performance and detect overfitting or underfitting trends. |
