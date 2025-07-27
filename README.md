@@ -279,7 +279,45 @@ Labels were assigned as 0 for no tumor and 1 for tumor present. I also ensured t
 | `labels.append(1)`                                               | Labeled tumor images with `1`.                                             |
 
 
+### Step 4: Data Preprocessing
 
+After collecting and labeling the MRI images, I converted the dataset and labels lists into NumPy arrays to optimize memory usage and computational speed. 
+Then, I split the data into training and testing sets (80%-20%) using train_test_split. 
+Finally, I normalized the pixel values to a 0–1 range using normalize() from Keras utilities, which helps the neural network converge faster and more accurately.
+
+| **Python Code**                                                                                       | **# Comments**                                                                |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `dataset = np.array(dataset)`<br>`labels = np.array(labels)`                                          | Converted image and label lists into NumPy arrays for efficient processing.   |
+| `x_train, x_test, y_train, y_test = train_test_split(dataset, labels, test_size=0.2, random_state=0)` | Split the data into training (80%) and testing (20%) sets.                    |
+| `x_train = normalize(x_train, axis=1)`<br>`x_test = normalize(x_test, axis=1)`                        | Normalized pixel values across each image to bring them to a scale of 0 to 1. |
+
+
+### Step 5: Build CNN Model
+
+I created a CNN model using Keras’ Sequential API. I began with an Input layer defining the shape of the input images. 
+The model architecture included three convolutional blocks with increasing filter sizes, each followed by ReLU activation and max pooling. 
+After flattening the output, I added a dense layer with dropout to reduce overfitting, followed by the final output layer with sigmoid activation for binary classification.
+
+| **Python Code**                                                                                                                                    | **# Comments**                                                              |
+| -------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `from tensorflow.keras.layers import Input`                                                                                                        | Imported the `Input` layer to define input shape.                           |
+| `model = Sequential()`                                                                                                                             | Initialized the Sequential model.                                           |
+| `model.add(Input(shape=(INPUT_SIZE, INPUT_SIZE, 3)))`                                                                                              | Defined the input shape for the CNN.                                        |
+| `model.add(Conv2D(32, (3, 3)))`<br>`model.add(Activation('relu'))`<br>`model.add(MaxPooling2D(pool_size=(2, 2)))`                                  | First Conv block with 32 filters, ReLU activation, and 2x2 max pooling.     |
+| `model.add(Conv2D(32, (3, 3), kernel_initializer='he_uniform'))`<br>`model.add(Activation('relu'))`<br>`model.add(MaxPooling2D(pool_size=(2, 2)))` | Second Conv block with same filters but He uniform initializer.             |
+| `model.add(Conv2D(64, (3, 3), kernel_initializer='he_uniform'))`<br>`model.add(Activation('relu'))`<br>`model.add(MaxPooling2D(pool_size=(2, 2)))` | Third Conv block with 64 filters.                                           |
+| `model.add(Flatten())`                                                                                                                             | Flattened the 2D outputs to 1D for Dense layers.                            |
+| `model.add(Dense(64))`<br>`model.add(Activation('relu'))`<br>`model.add(Dropout(0.5))`                                                             | Added a dense hidden layer and applied dropout for regularization.          |
+| `model.add(Dense(1))`<br>`model.add(Activation('sigmoid'))`                                                                                        | Final output layer with sigmoid for binary classification (tumor/no tumor). |
+
+### Step 6: Compile the Model
+
+I compiled the CNN model using the binary cross-entropy loss function, suitable for binary classification. 
+I selected the Adam optimizer for its adaptive learning capabilities and specified accuracy as the performance metric to monitor during training.
+
+| **Python Code**                                                                     | **# Comments**                                                            |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
+| `model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])` | Compiled the model with appropriate loss, optimizer, and accuracy metric. |
 
 
 
