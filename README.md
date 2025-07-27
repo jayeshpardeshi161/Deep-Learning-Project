@@ -336,7 +336,7 @@ This validation split helped ensure that the model was not overfitting. The trai
 | `Epoch 5/10 ─ accuracy: 0.9820 ─ val_accuracy: 0.9719`  | Model continued to improve, both training and validation accuracies increasing.        |
 | `Epoch 10/10 ─ accuracy: 0.9973 ─ val_accuracy: 0.9795` | Final epoch achieved excellent performance, nearing 98% accuracy on validation set.    |
 
-### Evaluate the Model
+### Step 8: Evaluate the Model
 
 After training, I evaluated the model using the test dataset, which was kept completely separate from the training and validation sets. 
 This step helps determine the model’s ability to generalize to new, unseen data. I calculated both loss and accuracy on the test set, and then printed the test accuracy as a percentage to two decimal places. 
@@ -351,6 +351,71 @@ The model achieved a high accuracy, indicating strong generalization performance
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `31/31 ━━━━━━━━━━━━━━━━ 0s 10ms/step - accuracy: 0.9714 - loss: 0.1158` | Model achieved \~97.14% test accuracy and low loss, indicating excellent performance. |
 | `Test Accuracy: 96.93%`                                                 | Final printed test accuracy rounded and formatted for clarity.                        |
+
+### Step 9: Save the Model
+
+After evaluating the model and confirming its strong performance, I saved the trained CNN model to a file named brain_tumor_cnn_model.keras. 
+Saving the model allows for future reuse without the need to retrain, which is useful for deployment, sharing, or continued experimentation. 
+I also printed a confirmation message to ensure the save operation completed successfully.
+
+| **Python Code**                             | **# Comments**                                                                         |
+| ------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `model.save("brain_tumor_cnn_model.keras")` | Saved the entire trained model (architecture, weights, and optimizer state) to a file. |
+| `print("Model successfully saved!")`        | Printed a confirmation message indicating that the model was saved successfully.       |
+
+### Step 10: Load the Model
+
+To verify that the saved CNN model could be reloaded successfully for future use (e.g., inference or continued training), 
+I loaded the model from the .keras file using TensorFlow's load_model() function. This confirms the persistence and portability of the trained model. 
+I also printed a confirmation message to ensure it was loaded without error.
+
+| **Python Code**                                     | **# Comments**                                                                    |
+| --------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `from tensorflow.keras.models import load_model`    | Imported the function needed to load a previously saved model.                    |
+| `import numpy as np`                                | Re-imported NumPy for compatibility, especially if further operations are needed. |
+| `model = load_model("brain_tumor_cnn_model.keras")` | Loaded the trained model from the saved `.keras` file.                            |
+| `print("✅ Model loaded successfully!")`             | Confirmed that the model was successfully loaded from disk.                       |
+
+| **Output**                     | **# Comments**                                                         |
+| ------------------------------ | ---------------------------------------------------------------------- |
+| `✅ Model loaded successfully!` | Confirms that the saved model file was correctly restored into memory. |
+
+### Step 11: Make a Prediction with the Model
+
+To verify that the trained model could make predictions, I created a dummy input with the same shape expected by the CNN (1 image of 64×64 pixels with 3 RGB channels). 
+I passed this dummy input through the model using predict() and interpreted the result based on a threshold of 0.5. This step helps validate that the model is functioning correctly for inference.
+
+| **Python Code**                                                                                                                | **# Comments**                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `dummy_input = np.random.rand(1, 64, 64, 3)`                                                                                   | Created a random dummy image to simulate a real input.             |
+| `prediction = model.predict(dummy_input)`                                                                                      | Generated a prediction score using the trained model.              |
+| `print("Prediction output:", prediction)`                                                                                      | Printed the raw probability score returned by the model.           |
+| `if prediction[0][0] > 0.5:`<br>    `print("Model Prediction: Tumor")`<br>`else:`<br>    `print("Model Prediction: No Tumor")` | Interpreted the output: values > 0.5 = "Tumor", else = "No Tumor". |
+
+| **Output**                        | **# Comments**                                           |
+| --------------------------------- | -------------------------------------------------------- |
+| `Prediction output: [[0.159118]]` | The prediction score indicates low confidence for tumor. |
+| `Model Prediction: No Tumor`      | Final interpretation of the model’s decision.            |
+
+### Step 12: Analyze Training Performance (Check for Overfitting)
+
+To evaluate model generalization and check for overfitting, I visualized the training vs validation accuracy and training vs validation loss using Matplotlib. 
+These plots help identify issues like underfitting or overfitting by comparing model behavior on training and unseen validation data over each epoch.
+
+| **Python Code**                                                                                                                                                                                                                                                                 | **# Comments**                                                             |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `import matplotlib.pyplot as plt`                                                                                                                                                                                                                                               | Imported Matplotlib for plotting graphs.                                   |
+| `acc = history.history['accuracy']`<br>`val_acc = history.history['val_accuracy']`<br>`loss = history.history['loss']`<br>`val_loss = history.history['val_loss']`<br>`epochs = range(1, len(acc) + 1)`                                                                         | Extracted training/validation accuracy and loss from the `history` object. |
+| `plt.figure(figsize=(12, 5))`                                                                                                                                                                                                                                                   | Created a figure with appropriate size for two subplots.                   |
+| `plt.subplot(1, 2, 1)`<br>`plt.plot(epochs, acc, 'b-', label='Training Accuracy')`<br>`plt.plot(epochs, val_acc, 'r-', label='Validation Accuracy')`<br>`plt.title('Training and Validation Accuracy')`<br>`plt.xlabel('Epochs')`<br>`plt.ylabel('Accuracy')`<br>`plt.legend()` | Plotted training vs validation accuracy to visually track performance.     |
+| `plt.subplot(1, 2, 2)`<br>`plt.plot(epochs, loss, 'b-', label='Training Loss')`<br>`plt.plot(epochs, val_loss, 'r-', label='Validation Loss')`<br>`plt.title('Training and Validation Loss')`<br>`plt.xlabel('Epochs')`<br>`plt.ylabel('Loss')`<br>`plt.legend()`               | Plotted training vs validation loss to detect overfitting patterns.        |
+| `plt.show()`                                                                                                                                                                                                                                                                    | Displayed the plots.                                                       |
+
+| **Output (Visual)**  | **# Comments**                                                                    |
+| -------------------- | --------------------------------------------------------------------------------- |
+| Accuracy/Loss Graphs | Helped visualize model performance and detect overfitting or underfitting trends. |
+
+
 
 
 
