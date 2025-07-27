@@ -231,6 +231,57 @@ I used the os module to check and confirm that the current working directory mat
 | `print(os.getcwd())`                                                                      | Printed the current working directory to verify that it points to the dataset folder. |
 | **Output:** `D:\Projects\Deep Learning Projects\Brain Tumor Detection Using CNN\datasets` | Confirms that the dataset directory is correctly set for loading images.              |
 
+To begin processing the brain tumor MRI data, I ensured that the script pointed to the correct working directory. 
+I verified the current directory using os.getcwd() and updated it using os.chdir() to match the dataset location. 
+Then, I defined the dataset path and loaded the image file names from the respective folders: 'yes' (tumor present) and 'no' (no tumor). This setup is necessary before beginning the image preprocessing and labeling phase.
+
+| **Python Code**                                                                                              | **# Comments**                                                           |
+| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `import os`                                                                                                  | Module used for directory operations.                                    |
+| `print("Current Directory:", os.getcwd())`                                                                   | Printed the current working directory to verify initial script location. |
+| **Output:** `Current Directory: D:\Projects\Deep Learning Projects\Brain Tumor Detection Using CNN\datasets` | Confirms the initial directory before any change.                        |
+| `os.chdir(r"D:\Projects\Deep Learning Projects\Brain Tumor Detection Using CNN\datasets")`                   | Changed the working directory to the dataset folder.                     |
+| `print("Current Directory:", os.getcwd())`                                                                   | Verified the change to ensure the correct path is active.                |
+| **Output:** `Current Directory: D:\Projects\Deep Learning Projects\Brain Tumor Detection Using CNN\datasets` | Confirms that directory change was successful.                           |
+| `image_directory = r'D:\Projects\Deep Learning Projects\Brain Tumor Detection Using CNN\datasets\\'`         | Defined the base path for accessing the 'yes' and 'no' image folders.    |
+| `no_tumor_images = os.listdir(image_directory + 'no/')`                                                      | Loaded file names of all MRI images labeled as "no tumor".               |
+| `yes_tumor_images = os.listdir(image_directory + 'yes/')`                                                    | Loaded file names of all MRI images labeled as "tumor present".          |
+
+
+### Step 3: Image Preprocessing and Label Assignment
+
+In this step, I initialized empty lists to store image data and their corresponding labels. 
+I then looped through all the MRI images in both the 'no' and 'yes' tumor directories. 
+Each image was read using OpenCV, converted from BGR to RGB using Pillow (PIL), resized to a standard input size for the CNN, and then appended to the dataset as a NumPy array. 
+Labels were assigned as 0 for no tumor and 1 for tumor present. I also ensured the dataset remained a Python list to avoid potential type issues during processing.
+
+| **Python Code**                                                  | **# Comments**                                                             |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `dataset = []`<br>`labels = []`                                  | I reset both lists to store MRI image data and their corresponding labels. |
+| `for image_name in no_tumor_images:`                             | I started looping through all the 'no tumor' images.                       |
+| `if image_name.endswith('.jpg'):`                                | Ensured only JPEG images are processed.                                    |
+| `img_path = os.path.join(image_directory, 'no', image_name)`     | Constructed the full path for each 'no tumor' image.                       |
+| `img_cv = cv2.imread(img_path)`                                  | Loaded the image using OpenCV.                                             |
+| `if img_cv is not None:`                                         | Checked for any corrupted or unreadable images.                            |
+| `img = Image.fromarray(cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB))` | Converted image from BGR to RGB using PIL.                                 |
+| `img = img.resize((INPUT_SIZE, INPUT_SIZE))`                     | Resized the image to match the CNN input dimensions.                       |
+| `dataset.append(np.array(img))`                                  | Added the processed image (as a NumPy array) to the dataset list.          |
+| `labels.append(0)`                                               | Appended label `0` for images with no tumor.                               |
+| `if not isinstance(dataset, list): dataset = list(dataset)`      | Ensured `dataset` remains a list before continuing.                        |
+| `for image_name in yes_tumor_images:`                            | I then looped through all the 'yes tumor' images.                          |
+| `if image_name.endswith('.jpg'):`                                | Processed only `.jpg` format files.                                        |
+| `img_path = os.path.join(image_directory, 'yes', image_name)`    | Constructed path for each 'yes tumor' image.                               |
+| `img_cv = cv2.imread(img_path)`                                  | Loaded each tumor image using OpenCV.                                      |
+| `if img_cv is not None:`                                         | Skipped any unreadable files.                                              |
+| `img = Image.fromarray(cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB))` | Converted image to RGB format using Pillow.                                |
+| `img = img.resize((INPUT_SIZE, INPUT_SIZE))`                     | Resized image to uniform input size for the CNN model.                     |
+| `dataset.append(np.array(img))`                                  | Added the image array to the dataset.                                      |
+| `labels.append(1)`                                               | Labeled tumor images with `1`.                                             |
+
+
+
+
+
 
 
 
