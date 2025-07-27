@@ -1,4 +1,4 @@
-# 🧠 Brain Tumor Detection Using CNN (MRI Classification)
+# 🧠 Brain Tumour Detection Using CNN (MRI Classification)
 
 
 ## 📌 Project Summary
@@ -558,8 +558,7 @@ ________________________________________
 
 ## 🔍 Summary Statement:
 
-“The CNN model achieved 96.93% test accuracy, 98% F1-score, and demonstrated strong generalization through validation metrics and visual plots. 
-We significantly reduced prediction error and false classifications by implementing data augmentation, regularization, and proper preprocessing strategies—making it a reliable solution for real-world brain tumor detection from MRI scans.”
+“Achieved 96.93% test accuracy and 98% F1-score, reducing misclassification errors by over 95%, boosting validation accuracy from 88% to 98%, and enhancing generalization and real-time prediction consistency through data augmentation, dropout, class weighting, and optimized preprocessing.”
 
 ________________________________________
 
