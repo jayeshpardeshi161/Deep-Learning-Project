@@ -320,6 +320,38 @@ I selected the Adam optimizer for its adaptive learning capabilities and specifi
 | `model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])` | Compiled the model with appropriate loss, optimizer, and accuracy metric. |
 
 
+### Step 7: Train the Model
+
+I trained the CNN model using the preprocessed training dataset. 
+I selected a batch size of 16 and trained the model for 10 epochs. Additionally, I allocated 10% of the training data for validation to monitor the model’s performance during training. 
+This validation split helped ensure that the model was not overfitting. The training history, including accuracy and loss, was captured for both training and validation sets.
+
+| **Python Code**                                                                         | **# Comments**                                                                                      |
+| --------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `history = model.fit(x_train, y_train, batch_size=16, epochs=10, validation_split=0.1)` | Trained the model with batch size 16, for 10 epochs, reserving 10% of training data for validation. |
+
+| **Output (Partial)**                                    | **# Comments**                                                                         |
+| ------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `Epoch 1/10 ─ accuracy: 0.7192 ─ val_accuracy: 0.8875`  | Model started learning; validation accuracy already high due to quality preprocessing. |
+| `Epoch 5/10 ─ accuracy: 0.9820 ─ val_accuracy: 0.9719`  | Model continued to improve, both training and validation accuracies increasing.        |
+| `Epoch 10/10 ─ accuracy: 0.9973 ─ val_accuracy: 0.9795` | Final epoch achieved excellent performance, nearing 98% accuracy on validation set.    |
+
+### Evaluate the Model
+
+After training, I evaluated the model using the test dataset, which was kept completely separate from the training and validation sets. 
+This step helps determine the model’s ability to generalize to new, unseen data. I calculated both loss and accuracy on the test set, and then printed the test accuracy as a percentage to two decimal places. 
+The model achieved a high accuracy, indicating strong generalization performance.
+
+| **Python Code**                                   | **# Comments**                                                |
+| ------------------------------------------------- | ------------------------------------------------------------- |
+| `loss, accuracy = model.evaluate(x_test, y_test)` | Evaluated the model's performance on the unseen test dataset. |
+| `print(f"Test Accuracy: {accuracy*100:.2f}%")`    | Converted the test accuracy to a readable percentage format.  |
+
+| **Output**                                                              | **# Comments**                                                                        |
+| ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `31/31 ━━━━━━━━━━━━━━━━ 0s 10ms/step - accuracy: 0.9714 - loss: 0.1158` | Model achieved \~97.14% test accuracy and low loss, indicating excellent performance. |
+| `Test Accuracy: 96.93%`                                                 | Final printed test accuracy rounded and formatted for clarity.                        |
+
 
 
 
