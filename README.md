@@ -188,6 +188,8 @@ ________________________________________
 
 ## ✅ What I Did
 
+<img width="1164" height="311" alt="Step 1 Import Required Libraries" src="https://github.com/user-attachments/assets/a37e33f1-12cb-42cf-aeaa-786c0c80019e" />
+
 ### Step 1: Import Required Libraries
 
 I imported essential Python libraries required for building a Convolutional Neural Network (CNN) model for brain tumor detection using MRI image classification. 
@@ -205,6 +207,8 @@ Ensuring the right set of libraries are imported at the beginning helps streamli
 | `from sklearn.model_selection import train_test_split`                                          | To divide the dataset into training and testing sets for model validation.                                                                   |
 | `from tensorflow.keras.models import Sequential`                                                | Allows the creation of a simple sequential CNN architecture layer by layer.                                                                  |
 | `from tensorflow.keras.layers import Conv2D, MaxPooling2D, Activation, Dropout, Flatten, Dense` | Key CNN components: convolution, pooling, activation functions, dropout for regularization, flattening, and dense layers for classification. |
+
+<img width="1182" height="423" alt="Step 2 Load Dataset" src="https://github.com/user-attachments/assets/168f3d2d-c004-44c6-8b70-0cd817e8a6b4" />
 
 ### Step 2: Load Dataset
 
@@ -306,6 +310,7 @@ I selected the Adam optimizer for its adaptive learning capabilities and specifi
 | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | `model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])` | Compiled the model with appropriate loss, optimizer, and accuracy metric. |
 
+<img width="1166" height="525" alt="Step 7 Train the Model" src="https://github.com/user-attachments/assets/eb4fde26-4a88-4c8f-8cff-b516a968227d" />
 
 ### Step 7: Train the Model
 
@@ -323,6 +328,8 @@ This validation split helped ensure that the model was not overfitting. The trai
 | `Epoch 5/10 ─ accuracy: 0.9820 ─ val_accuracy: 0.9719`  | Model continued to improve, both training and validation accuracies increasing.        |
 | `Epoch 10/10 ─ accuracy: 0.9973 ─ val_accuracy: 0.9795` | Final epoch achieved excellent performance, nearing 98% accuracy on validation set.    |
 
+<img width="1186" height="743" alt="Step 8 Evaluate the Mode, 9 Save the Mode, 10 Load the Mode" src="https://github.com/user-attachments/assets/054669e9-aa03-442a-bee7-19ef0a95f91c" />
+
 ### Step 8: Evaluate the Model
 
 After training, I evaluated the model using the test dataset, which was kept completely separate from the training and validation sets. 
@@ -333,6 +340,7 @@ The model achieved a high accuracy, indicating strong generalization performance
 | ------------------------------------------------- | ------------------------------------------------------------- |
 | `loss, accuracy = model.evaluate(x_test, y_test)` | Evaluated the model's performance on the unseen test dataset. |
 | `print(f"Test Accuracy: {accuracy*100:.2f}%")`    | Converted the test accuracy to a readable percentage format.  |
+
 | **Output**                                                              | **# Comments**                                                                        |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `31/31 ━━━━━━━━━━━━━━━━ 0s 10ms/step - accuracy: 0.9714 - loss: 0.1158` | Model achieved \~97.14% test accuracy and low loss, indicating excellent performance. |
@@ -361,9 +369,12 @@ I also printed a confirmation message to ensure it was loaded without error.
 | `import numpy as np`                                | Re-imported NumPy for compatibility, especially if further operations are needed. |
 | `model = load_model("brain_tumor_cnn_model.keras")` | Loaded the trained model from the saved `.keras` file.                            |
 | `print("✅ Model loaded successfully!")`             | Confirmed that the model was successfully loaded from disk.                       |
+
 | **Output**                     | **# Comments**                                                         |
 | ------------------------------ | ---------------------------------------------------------------------- |
 | `✅ Model loaded successfully!` | Confirms that the saved model file was correctly restored into memory. |
+
+<img width="1186" height="267" alt="Step 11 Make a Prediction with the Model" src="https://github.com/user-attachments/assets/c4623e86-1378-4e57-ac25-b1cac667485e" />
 
 ### Step 11: Make a Prediction with the Model
 
@@ -376,10 +387,13 @@ I passed this dummy input through the model using predict() and interpreted the 
 | `prediction = model.predict(dummy_input)`                                                                                      | Generated a prediction score using the trained model.              |
 | `print("Prediction output:", prediction)`                                                                                      | Printed the raw probability score returned by the model.           |
 | `if prediction[0][0] > 0.5:`<br>    `print("Model Prediction: Tumor")`<br>`else:`<br>    `print("Model Prediction: No Tumor")` | Interpreted the output: values > 0.5 = "Tumor", else = "No Tumor". |
+
 | **Output**                        | **# Comments**                                           |
 | --------------------------------- | -------------------------------------------------------- |
 | `Prediction output: [[0.159118]]` | The prediction score indicates low confidence for tumor. |
 | `Model Prediction: No Tumor`      | Final interpretation of the model’s decision.            |
+
+<img width="1152" height="839" alt="Step 12 Analyze Training Performance - Check for Overfitting" src="https://github.com/user-attachments/assets/a8338f7f-9817-42fb-9d7e-e2c5beb559bb" />
 
 ### Step 12: Analyze Training Performance (Check for Overfitting)
 
@@ -394,10 +408,12 @@ These plots help identify issues like underfitting or overfitting by comparing m
 | `plt.subplot(1, 2, 1)`<br>`plt.plot(epochs, acc, 'b-', label='Training Accuracy')`<br>`plt.plot(epochs, val_acc, 'r-', label='Validation Accuracy')`<br>`plt.title('Training and Validation Accuracy')`<br>`plt.xlabel('Epochs')`<br>`plt.ylabel('Accuracy')`<br>`plt.legend()` | Plotted training vs validation accuracy to visually track performance.     |
 | `plt.subplot(1, 2, 2)`<br>`plt.plot(epochs, loss, 'b-', label='Training Loss')`<br>`plt.plot(epochs, val_loss, 'r-', label='Validation Loss')`<br>`plt.title('Training and Validation Loss')`<br>`plt.xlabel('Epochs')`<br>`plt.ylabel('Loss')`<br>`plt.legend()`               | Plotted training vs validation loss to detect overfitting patterns.        |
 | `plt.show()`                                                                                                                                                                                                                                                                    | Displayed the plots.                                                       |
+
 | **Output (Visual)**  | **# Comments**                                                                    |
 | -------------------- | --------------------------------------------------------------------------------- |
 | Accuracy/Loss Graphs | Helped visualize model performance and detect overfitting or underfitting trends. |
 
+<img width="1035" height="822" alt="Step 13 Plot Accuracy and Loss Graphs" src="https://github.com/user-attachments/assets/3bd91c1e-d0ac-4dd9-82dd-04a78f4546b6" />
 
 ### Step 13: Plot Accuracy and Loss Graphs
 
@@ -411,6 +427,8 @@ After training, I visualized the training and validation accuracy and loss acros
 | `plt.plot(history.history['loss'], label='Train Loss')`<br>`plt.plot(history.history['val_loss'], label='Validation Loss')`                 | Plotted training and validation loss.     |
 | `plt.title('Model Loss')`<br>`plt.xlabel('Epochs')`<br>`plt.ylabel('Loss')`<br>`plt.legend()`<br>`plt.grid(True)`<br>`plt.show()`           | Displayed the loss plot.                  |
 
+<img width="1166" height="231" alt="Step 14 Evaluate on Test Set -Again" src="https://github.com/user-attachments/assets/b4aed1fc-f4e5-4f79-9a16-c9f6d4a205f6" />
+
 ### Step 14: Evaluate on Test Set (Again)
 
 I re-evaluated the model on the test set after training with augmented data to confirm real-world performance.
@@ -419,6 +437,7 @@ I re-evaluated the model on the test set after training with augmented data to c
 | ------------------------------------------------- | ------------------------------------------------ |
 | `loss, accuracy = model.evaluate(x_test, y_test)` | Evaluated model performance on the test dataset. |
 | `print(f"Test Accuracy: {accuracy * 100:.2f}%")`  | Printed test accuracy in a readable format.      |
+
 | **Output**              | **# Comments**                            |
 | ----------------------- | ----------------------------------------- |
 | `Test Accuracy: 96.93%` | Model performed very well on unseen data. |
@@ -433,6 +452,8 @@ To improve generalization, I applied real-time data augmentation using ImageData
 | `datagen = ImageDataGenerator(...)`                                   | Created generator with random transformations (rotation, zoom, flips, etc.). |
 | `datagen.fit(x_train)`                                                | Adapted generator to training data.                                          |
 
+<img width="1181" height="263" alt="Step 16 Check Class Balance" src="https://github.com/user-attachments/assets/5b4840bd-65f6-459b-8e53-3222626553fb" />
+
 ### Step 16: Check Class Balance
 
 I computed class weights to ensure balanced learning, especially if the dataset is imbalanced between tumor/no tumor classes.
@@ -441,6 +462,8 @@ I computed class weights to ensure balanced learning, especially if the dataset 
 | ---------------------------------------------------------------------------------------------------- | ------------------------------------- |
 | `from sklearn.utils import class_weight`<br>`class_weights = class_weight.compute_class_weight(...)` | Computed balanced class weights.      |
 | `print("Class weights:", class_weights)`                                                             | Printed the weights for both classes. |
+
+<img width="1159" height="506" alt="Step 17 Confusion Matrix   Metrics" src="https://github.com/user-attachments/assets/cb62b900-2a3e-435e-84ec-a97197effd97" />
 
 ### Step 17: Confusion Matrix & Metrics
 
@@ -458,6 +481,8 @@ I used confusion_matrix and classification_report to evaluate precision, recall,
 | --------------------------------------------------------------- | --------------------------------------------------------- |
 | `Accuracy: 97%`<br>`Precision/Recall/F1: High for both classes` | Confirmed the model performs excellently on both classes. |
 
+<img width="1175" height="666" alt="Step 18 Retrain with Augmentation" src="https://github.com/user-attachments/assets/1edf5401-6cdb-46c6-bf11-c1a9dc122ddc" />
+
 ### Step 18: Retrain with Augmentation
 
 I retrained the model using the augmented training data via .flow() to improve generalization and reduce overfitting.
@@ -465,9 +490,12 @@ I retrained the model using the augmented training data via .flow() to improve g
 | **Python Code**                               | **# Comments**                             |
 | --------------------------------------------- | ------------------------------------------ |
 | `history = model.fit(datagen.flow(...), ...)` | Used augmented image batches for training. |
+
 | **Output**          | **# Comments**                                                 |
 | ------------------- | -------------------------------------------------------------- |
 | `Val Accuracy ~98%` | Training with augmentation maintained or improved performance. |
+
+<img width="1054" height="844" alt="Step 19 Build a Prediction Pipeline" src="https://github.com/user-attachments/assets/0df73c19-5478-4717-a3da-16f228821ba9" />
 
 ### Step 19: Build a Prediction Pipeline
 
@@ -478,6 +506,7 @@ I developed a reusable function to preprocess and predict MRI images for tumor d
 | `import os, cv2, numpy as np`<br>`from tensorflow.keras.models import load_model` | Imported libraries and loaded the model. |
 | `def predict_image(image_path):`<br>`...`                                         | Defined a complete prediction function.  |
 | `predict_image(image_path)`                                                       | Ran a sample prediction on a new image.  |
+
 | **Output**                                     | **# Comments**                                              |
 | ---------------------------------------------- | ----------------------------------------------------------- |
 | `🧠 Prediction: Tumor`<br>`✅ Confidence: 1.00` | Successfully predicted tumor presence with high confidence. |
