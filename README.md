@@ -416,8 +416,88 @@ These plots help identify issues like underfitting or overfitting by comparing m
 | Accuracy/Loss Graphs | Helped visualize model performance and detect overfitting or underfitting trends. |
 
 
+### Step 13: Plot Accuracy and Loss Graphs
 
+After training, I visualized the training and validation accuracy and loss across epochs to monitor learning trends and identify potential overfitting or underfitting.
 
+| **Python Code**                                                                                                                             | **# Comments**                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| `import matplotlib.pyplot as plt`                                                                                                           | Imported the plotting library.            |
+| `plt.plot(history.history['accuracy'], label='Train Accuracy')`<br>`plt.plot(history.history['val_accuracy'], label='Validation Accuracy')` | Plotted training and validation accuracy. |
+| `plt.title('Model Accuracy')`<br>`plt.xlabel('Epochs')`<br>`plt.ylabel('Accuracy')`<br>`plt.legend()`<br>`plt.grid(True)`<br>`plt.show()`   | Displayed the accuracy plot.              |
+| `plt.plot(history.history['loss'], label='Train Loss')`<br>`plt.plot(history.history['val_loss'], label='Validation Loss')`                 | Plotted training and validation loss.     |
+| `plt.title('Model Loss')`<br>`plt.xlabel('Epochs')`<br>`plt.ylabel('Loss')`<br>`plt.legend()`<br>`plt.grid(True)`<br>`plt.show()`           | Displayed the loss plot.                  |
+
+### Step 14: Evaluate on Test Set (Again)
+
+I re-evaluated the model on the test set after training with augmented data to confirm real-world performance.
+
+| **Python Code**                                   | **# Comments**                                   |
+| ------------------------------------------------- | ------------------------------------------------ |
+| `loss, accuracy = model.evaluate(x_test, y_test)` | Evaluated model performance on the test dataset. |
+| `print(f"Test Accuracy: {accuracy * 100:.2f}%")`  | Printed test accuracy in a readable format.      |
+| **Output**              | **# Comments**                            |
+| ----------------------- | ----------------------------------------- |
+| `Test Accuracy: 96.93%` | Model performed very well on unseen data. |
+
+### Step 15: Data Augmentation
+
+To improve generalization, I applied real-time data augmentation using ImageDataGenerator, introducing random transformations during training.
+
+| **Python Code**                                                       | **# Comments**                                                               |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| `from tensorflow.keras.preprocessing.image import ImageDataGenerator` | Imported augmentation utility.                                               |
+| `datagen = ImageDataGenerator(...)`                                   | Created generator with random transformations (rotation, zoom, flips, etc.). |
+| `datagen.fit(x_train)`                                                | Adapted generator to training data.                                          |
+
+### Step 16: Check Class Balance
+
+I computed class weights to ensure balanced learning, especially if the dataset is imbalanced between tumor/no tumor classes.
+
+| **Python Code**                                                                                      | **# Comments**                        |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| `from sklearn.utils import class_weight`<br>`class_weights = class_weight.compute_class_weight(...)` | Computed balanced class weights.      |
+| `print("Class weights:", class_weights)`                                                             | Printed the weights for both classes. |
+
+### Step 17: Confusion Matrix & Metrics
+
+I used confusion_matrix and classification_report to evaluate precision, recall, and F1-score — providing a complete view of model performance.
+
+| **Python Code**                                                       | **# Comments**                                 |
+| --------------------------------------------------------------------- | ---------------------------------------------- |
+| `from sklearn.metrics import classification_report, confusion_matrix` | Imported evaluation metrics.                   |
+| `y_pred = model.predict(x_test)`                                      | Predicted on the test set.                     |
+| `y_pred = (y_pred > 0.5).astype("int32")`                             | Converted probabilities to binary predictions. |
+| `print(confusion_matrix(y_test, y_pred))`                             | Printed the confusion matrix.                  |
+| `print(classification_report(y_test, y_pred))`                        | Displayed precision, recall, f1-score, etc.    |
+
+| **Output (Summary)**                                            | **# Comments**                                            |
+| --------------------------------------------------------------- | --------------------------------------------------------- |
+| `Accuracy: 97%`<br>`Precision/Recall/F1: High for both classes` | Confirmed the model performs excellently on both classes. |
+
+### Step 18: Retrain with Augmentation
+
+I retrained the model using the augmented training data via .flow() to improve generalization and reduce overfitting.
+
+| **Python Code**                               | **# Comments**                             |
+| --------------------------------------------- | ------------------------------------------ |
+| `history = model.fit(datagen.flow(...), ...)` | Used augmented image batches for training. |
+| **Output**          | **# Comments**                                                 |
+| ------------------- | -------------------------------------------------------------- |
+| `Val Accuracy ~98%` | Training with augmentation maintained or improved performance. |
+
+### Step 19: Build a Prediction Pipeline
+
+I developed a reusable function to preprocess and predict MRI images for tumor detection. This function loads an image, resizes, normalizes, and predicts using the trained CNN.
+
+| **Python Code**                                                                   | **# Comments**                           |
+| --------------------------------------------------------------------------------- | ---------------------------------------- |
+| `import os, cv2, numpy as np`<br>`from tensorflow.keras.models import load_model` | Imported libraries and loaded the model. |
+| `def predict_image(image_path):`<br>`...`                                         | Defined a complete prediction function.  |
+| `predict_image(image_path)`                                                       | Ran a sample prediction on a new image.  |
+| **Output**                                     | **# Comments**                                              |
+| ---------------------------------------------- | ----------------------------------------------------------- |
+| `🧠 Prediction: Tumor`<br>`✅ Confidence: 1.00` | Successfully predicted tumor presence with high confidence. |
 
 
 
