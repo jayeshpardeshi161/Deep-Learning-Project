@@ -1,10 +1,179 @@
 # 🧠 Brain Tumor Detection Using CNN (MRI Classification)
 
-## 👨‍🔬 Author Note
-This project represents a practical implementation of a binary classification pipeline for medical imaging. It leverages a custom-trained Convolutional Neural Network (CNN) to detect brain tumors in MRI scans.
 
-## 📌 Project Overview
-The goal of this project was to build a binary image classification model that predicts whether an MRI scan shows a tumor or no tumor.
+## 📌 Project Summary
+
+This project focuses on building a Convolutional Neural Network (CNN) model to classify MRI brain scans as either having a tumor or no tumor. By leveraging supervised deep learning techniques, specifically CNNs, the model achieves high accuracy in detecting abnormalities in medical imaging, aiding early diagnosis and treatment planning.
+
+## 🎯 Project Goal
+
+To develop a robust and accurate deep learning model using Convolutional Neural Networks for binary image classification (tumor vs. no tumor).
+
+To automate brain tumor detection from MRI scans and assist radiologists in medical diagnosis.
+
+## ❓ Problem Statement
+
+Brain tumors can be life-threatening and often require early diagnosis for effective treatment. Manual detection from MRI images is time-consuming and subject to human error. The goal is to develop an AI-based system that:
+
+Detects the presence of brain tumors from MRI images.
+
+Provides accurate predictions with minimal false negatives/positives.
+
+Offers a reliable model suitable for integration into clinical workflows.
+
+## 🧾 Dataset Overview
+
+Source: Local directory dataset containing two subfolders: yes/ (tumor present), no/ (tumor absent).
+
+Format: JPEG images
+
+Classes:
+
+1 → Tumor present
+
+0 → No tumor
+
+Image Dimensions: Resized to 64x64 pixels for model compatibility.
+
+## ⚙️ Requirements
+
+| Library                | Purpose                               |
+| ---------------------- | ------------------------------------- |
+| `numpy`                | Numerical operations                  |
+| `cv2`                  | Image preprocessing                   |
+| `PIL`                  | Image reading and resizing            |
+| `matplotlib / seaborn` | Visualizations                        |
+| `tensorflow.keras`     | Model building and training           |
+| `sklearn`              | Dataset splitting, evaluation metrics |
+| `imblearn` (optional)  | Class balancing                       |
+| `joblib`               | Model saving (optional)               |
+
+--
+
+## 🔬 Exploratory Data Analysis (EDA) Steps
+
+| Step               | Description                                                               |
+| ------------------ | ------------------------------------------------------------------------- |
+| Dataset Loading    | Loaded image file paths from `yes/` and `no/` folders.                    |
+| Image Processing   | Converted images to RGB, resized to 64x64, and converted to NumPy arrays. |
+| Labeling           | Labeled data: `0` for no tumor, `1` for tumor.                            |
+| Dataset Conversion | Transformed list into NumPy arrays for efficient training.                |
+| Train-Test Split   | Split into 80% training, 20% testing.                                     |
+| Normalization      | Scaled pixel values between 0 and 1.                                      |
+
+--
+
+## 🏗️ Model Architecture
+
+Type: CNN (Sequential model)
+
+Input Shape: (64, 64, 3)
+
+Layers:
+
+Conv2D + ReLU + MaxPooling2D × 3 (with increasing filters)
+
+Flatten
+
+Dense layer with Dropout
+
+Output: Dense(1) with Sigmoid activation
+
+Loss Function: Binary Crossentropy
+
+Optimizer: Adam
+
+Metrics: Accuracy
+
+## 📊 Visualization
+
+**1. Accuracy Plot**
+Showed improvement over epochs and convergence between training and validation accuracy.
+
+**2. Loss Plot**
+Observed decreasing training and validation loss — minimal overfitting.
+
+**3. Confusion Matrix**
+
+| Label        | Precision | Recall | F1-score |
+| ------------ | --------- | ------ | -------- |
+| 0 (No Tumor) | 0.98      | 0.93   | 0.95     |
+| 1 (Tumor)    | 0.97      | 0.99   | 0.98     |
+
+## 🔍 Insights from Data Augmentation
+
+Applied: Rotation, zoom, width/height shifts, horizontal flip.
+
+Effect: Improved generalization and prevented overfitting.
+
+Training Method: Used .flow() method from ImageDataGenerator.
+
+## 📈 Key Findings & Analysis
+
+| Aspect          | Insight                                                              |
+| --------------- | -------------------------------------------------------------------- |
+| Performance     | Achieved **97%+** accuracy on test set.                              |
+| Overfitting     | Addressed using dropout, data augmentation, and early stopping.      |
+| Class Imbalance | Managed using computed class weights and augmentation.               |
+| Reliability     | High precision and recall metrics demonstrate model trustworthiness. |
+
+## 🧪 Evaluation Metrics
+
+| Metric              | Result     |
+| ------------------- | ---------- |
+| Accuracy            | **96.93%** |
+| Loss                | \~0.11     |
+| Precision (Class 1) | 0.97       |
+| Recall (Class 1)    | 0.99       |
+| F1-Score (Class 1)  | 0.98       |
+
+## 🧠 Inference / Prediction Example
+
+A custom function was built to take any new MRI image and:
+
+Resize, normalize, and reshape it.
+
+Use the trained model to predict and classify as “Tumor” or “No Tumor”.
+
+Display prediction with confidence.
+
+| Output Example         |
+| ---------------------- |
+| `🧠 Prediction: Tumor` |
+| `✅ Confidence: 1.00`   |
+
+## 🛠️ Decisions Taken
+
+Reduced image size to 64x64 for faster computation.
+
+Chose Conv2D + ReLU + MaxPooling blocks based on CNN best practices.
+
+Added dropout to prevent overfitting.
+
+Applied ImageDataGenerator to generalize better.
+
+Used test set accuracy + confusion matrix + classification report to ensure real-world reliability.
+
+## 🧠 Inference
+
+The model demonstrates high capability in classifying MRI images for brain tumor detection. 
+Its predictions are consistent, and the pipeline supports future improvements such as real-time deployment, GUI-based frontend integration, and use in radiology tools.
+
+## ✅ Conclusion
+
+This deep learning-based brain tumor detection project successfully implemented a full image classification pipeline using Convolutional Neural Networks. It included:
+
+Dataset processing and visualization
+
+Model training, tuning, and augmentation
+
+Model evaluation through real metrics
+
+Real-time prediction pipeline
+
+With an accuracy of ~97% and excellent precision/recall, the model is well-suited for aiding clinical diagnosis and further deployment in healthcare systems.
+
+--
 
 ## 🗂️ Project Workflow
 
