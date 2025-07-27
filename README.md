@@ -21,6 +21,8 @@ Provides accurate predictions with minimal false negatives/positives.
 
 Offers a reliable model suitable for integration into clinical workflows.
 
+________________________________________
+
 ## 🧾 Dataset Overview
 
 Source: Local directory dataset containing two subfolders: yes/ (tumor present), no/ (tumor absent).
@@ -35,6 +37,8 @@ Classes:
 
 Image Dimensions: Resized to 64x64 pixels for model compatibility.
 
+________________________________________
+
 ## ⚙️ Requirements
 
 | Library                | Purpose                               |
@@ -48,7 +52,7 @@ Image Dimensions: Resized to 64x64 pixels for model compatibility.
 | `imblearn` (optional)  | Class balancing                       |
 | `joblib`               | Model saving (optional)               |
 
---
+________________________________________
 
 ## 🔬 Exploratory Data Analysis (EDA) Steps
 
@@ -61,7 +65,7 @@ Image Dimensions: Resized to 64x64 pixels for model compatibility.
 | Train-Test Split   | Split into 80% training, 20% testing.                                     |
 | Normalization      | Scaled pixel values between 0 and 1.                                      |
 
---
+________________________________________
 
 ## 🏗️ Model Architecture
 
@@ -85,6 +89,8 @@ Optimizer: Adam
 
 Metrics: Accuracy
 
+________________________________________
+
 ## 📊 Visualization
 
 **1. Accuracy Plot**
@@ -99,6 +105,8 @@ Observed decreasing training and validation loss — minimal overfitting.
 | ------------ | --------- | ------ | -------- |
 | 0 (No Tumor) | 0.98      | 0.93   | 0.95     |
 | 1 (Tumor)    | 0.97      | 0.99   | 0.98     |
+
+________________________________________
 
 ## 🔍 Insights from Data Augmentation
 
@@ -142,6 +150,7 @@ Display prediction with confidence.
 | `🧠 Prediction: Tumor` |
 | `✅ Confidence: 1.00`   |
 
+
 ## 🛠️ Decisions Taken
 
 Reduced image size to 64x64 for faster computation.
@@ -173,7 +182,7 @@ Real-time prediction pipeline
 
 With an accuracy of ~97% and excellent precision/recall, the model is well-suited for aiding clinical diagnosis and further deployment in healthcare systems.
 
---
+________________________________________
 
 ## 🗂️ Project Workflow
 
@@ -473,10 +482,12 @@ I developed a reusable function to preprocess and predict MRI images for tumor d
 | ---------------------------------------------- | ----------------------------------------------------------- |
 | `🧠 Prediction: Tumor`<br>`✅ Confidence: 1.00` | Successfully predicted tumor presence with high confidence. |
 
-
+________________________________________
 
 ## 📄 License
 This project is licensed under the MIT License 
+
+________________________________________
 
 ## 🙋‍♂️ Contact
 📧 Gmail:[jayeshpardeshi161@gmail.com]
