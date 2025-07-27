@@ -482,6 +482,7 @@ I developed a reusable function to preprocess and predict MRI images for tumor d
 | ---------------------------------------------- | ----------------------------------------------------------- |
 | `🧠 Prediction: Tumor`<br>`✅ Confidence: 1.00` | Successfully predicted tumor presence with high confidence. |
 
+________________________________________
 
 ## ✅ Project Achievements
 
@@ -497,6 +498,8 @@ I developed a reusable function to preprocess and predict MRI images for tumor d
 | **Data Augmentation Impact**         | Improved model robustness and variability by training on augmented data.                           |
 | **Model Scalability**                | Model can be scaled or transferred to real-world applications like web-based diagnostic tools.     |
 | **Clear Visualization**              | Effectively visualized accuracy and loss trends to track and validate model learning behavior.     |
+
+________________________________________
 
 ## 🔍 Summary Statement:
 
