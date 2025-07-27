@@ -482,6 +482,27 @@ I developed a reusable function to preprocess and predict MRI images for tumor d
 | ---------------------------------------------- | ----------------------------------------------------------- |
 | `🧠 Prediction: Tumor`<br>`✅ Confidence: 1.00` | Successfully predicted tumor presence with high confidence. |
 
+
+## ✅ Project Achievements
+
+| ✅ Achievement                        | 📈 Result                                                                                          |
+| ------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| **High Test Accuracy**               | Achieved **96.93% accuracy** on the unseen test dataset.                                           |
+| **Improved Validation Accuracy**     | Validation accuracy improved from **\~88% to \~98%** across 10 epochs.                             |
+| **Error Reduction**                  | Reduced misclassification errors by over **95%** after training and applying data augmentation.    |
+| **Strong Generalization**            | Successfully reduced overfitting using dropout, data augmentation, and class weighting.            |
+| **Precision & Recall (Tumor class)** | Achieved **97% precision** and **99% recall**, ensuring very few false negatives.                  |
+| **Robust Model Performance**         | Consistently performed well on new and dummy data samples.                                         |
+| **Model Reusability**                | Built a prediction pipeline and saved the model, enabling real-time prediction from custom images. |
+| **Data Augmentation Impact**         | Improved model robustness and variability by training on augmented data.                           |
+| **Model Scalability**                | Model can be scaled or transferred to real-world applications like web-based diagnostic tools.     |
+| **Clear Visualization**              | Effectively visualized accuracy and loss trends to track and validate model learning behavior.     |
+
+## 🔍 Summary Statement:
+
+“The CNN model achieved 96.93% test accuracy, 98% F1-score, and demonstrated strong generalization through validation metrics and visual plots. 
+We significantly reduced prediction error and false classifications by implementing data augmentation, regularization, and proper preprocessing strategies—making it a reliable solution for real-world brain tumor detection from MRI scans.”
+
 ________________________________________
 
 ## 📄 License
