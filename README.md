@@ -199,7 +199,40 @@ def predict_image(image_path):
 
 --
 
-                                                                                |
+## ✅ What I Did
+
+### Step 1: Import Required Libraries
+
+I imported essential Python libraries required for building a Convolutional Neural Network (CNN) model for brain tumor detection using MRI image classification. 
+These libraries serve different purposes such as image preprocessing, numerical computation, deep learning model creation, dataset splitting, and normalization. 
+Ensuring the right set of libraries are imported at the beginning helps streamline the project and prevents redundant imports later in the pipeline.
+
+| **Python Code**                                                                                 | **# Comments**                                                                                                                               |
+| ----------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `import os`                                                                                     | To access and manage file directories, useful for navigating through MRI image folders.                                                      |
+| `import cv2`                                                                                    | Used for reading and preprocessing image files (e.g., resizing, grayscale conversion).                                                       |
+| `import numpy as np`                                                                            | For performing efficient numerical and matrix operations on image data.                                                                      |
+| `from PIL import Image`                                                                         | Provides additional image manipulation functionality, especially format conversion.                                                          |
+| `import tensorflow as tf`                                                                       | Main deep learning framework used to build and train the CNN model.                                                                          |
+| `from tensorflow.keras.utils import normalize`                                                  | To scale pixel values between 0 and 1, improving training efficiency.                                                                        |
+| `from sklearn.model_selection import train_test_split`                                          | To divide the dataset into training and testing sets for model validation.                                                                   |
+| `from tensorflow.keras.models import Sequential`                                                | Allows the creation of a simple sequential CNN architecture layer by layer.                                                                  |
+| `from tensorflow.keras.layers import Conv2D, MaxPooling2D, Activation, Dropout, Flatten, Dense` | Key CNN components: convolution, pooling, activation functions, dropout for regularization, flattening, and dense layers for classification. |
+
+### Step 2: Load Dataset
+
+In this step, I verified the working directory to ensure that the dataset path was correctly set. 
+This is crucial to prevent file-not-found errors when loading MRI image data. 
+I used the os module to check and confirm that the current working directory matches the dataset location, which is essential for accessing and loading image files for further processing.
+
+| **Python Code**                                                                           | **# Comments**                                                                        |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `import os`                                                                               | Used to interact with the file system and manage paths.                               |
+| `print(os.getcwd())`                                                                      | Printed the current working directory to verify that it points to the dataset folder. |
+| **Output:** `D:\Projects\Deep Learning Projects\Brain Tumor Detection Using CNN\datasets` | Confirms that the dataset directory is correctly set for loading images.              |
+
+
+
 
 
 ## 📄 License
