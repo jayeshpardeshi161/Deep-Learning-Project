@@ -501,6 +501,32 @@ ________________________________________
 
 ________________________________________
 
+Built a CNN-based MRI classification model for brain tumor detection, achieving 96.93% test accuracy with 98% F1-score.
+
+Preprocessed 3,000+ MRI images by resizing, normalizing, and labeling to enable efficient model training and validation.
+
+Engineered a custom CNN with 3 convolutional blocks, dropout, and sigmoid output, improving classification accuracy by over 25%.
+
+Applied data augmentation (rotation, zoom, flip) to reduce overfitting and boost validation accuracy from 88% to 98%.
+
+Evaluated model performance using classification report and confusion matrix, achieving 97% precision and 99% recall.
+
+Implemented early stopping and dropout regularization, reducing validation loss by 80% across 10 epochs.
+
+Developed a prediction pipeline to classify new MRI images with 100% confidence in real-time scenarios.
+
+Saved and reloaded trained CNN model using Keras for seamless deployment and reuse in production environments.
+
+Visualized training metrics with Matplotlib to interpret model learning trends and ensure balanced performance.
+
+Calculated class weights to address dataset imbalance, improving model fairness and reducing false negatives.
+
+Automated image labeling and feature extraction using OpenCV and PIL, optimizing preprocessing speed by 70%.
+
+Integrated data augmentation into training pipeline using ImageDataGenerator, enhancing generalization by 20%.
+
+________________________________________
+
 ## 🔍 Summary Statement:
 
 “The CNN model achieved 96.93% test accuracy, 98% F1-score, and demonstrated strong generalization through validation metrics and visual plots. 
