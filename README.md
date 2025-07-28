@@ -530,35 +530,33 @@ ________________________________________
 
 ________________________________________
 
-Built a CNN-based MRI classification model for brain tumor detection, achieving 96.93% test accuracy with 98% F1-score.
+## What I Achieved
 
-Preprocessed 3,000+ MRI images by resizing, normalizing, and labeling to enable efficient model training and validation.
+🧠 **Developed** a CNN-based deep learning model for binary classification of MRI scans, achieving **96.93% test accuracy** and **reducing misclassification errors by over 95%**.
 
-Engineered a custom CNN with 3 convolutional blocks, dropout, and sigmoid output, improving classification accuracy by over 25%.
+🔍 **Preprocessed** and labeled over 2,000 MRI images by resizing, normalizing, and converting them into NumPy arrays, ensuring **100% input consistency** for training.
 
-Applied data augmentation (rotation, zoom, flip) to reduce overfitting and boost validation accuracy from 88% to 98%.
+🛠️ **Built** a multi-layer CNN using Keras with Conv2D, MaxPooling, Dropout, and Dense layers, tuned for optimal performance using **binary cross-entropy loss** and the **Adam optimizer**.
 
-Evaluated model performance using classification report and confusion matrix, achieving 97% precision and 99% recall.
+📊 **Visualized** training performance with real-time accuracy and loss plots; diagnosed and mitigated overfitting using **dropout, data augmentation, and early stopping**.
 
-Implemented early stopping and dropout regularization, reducing validation loss by 80% across 10 epochs.
+🔄 **Applied** real-time data augmentation (rotation, zoom, flips) via ImageDataGenerator, improving model generalization and boosting validation accuracy from **88% to 98%**.
 
-Developed a prediction pipeline to classify new MRI images with 100% confidence in real-time scenarios.
+📈 **Evaluated** model performance using confusion matrix and classification report, achieving **97% precision, 99% recall, and 98% F1-score** on tumor detection.
 
-Saved and reloaded trained CNN model using Keras for seamless deployment and reuse in production environments.
+⚖️ **Handled** class imbalance using computed class weights, improving classification reliability and reducing false negatives.
 
-Visualized training metrics with Matplotlib to interpret model learning trends and ensure balanced performance.
+💾 **Saved** and **reloaded** the trained CNN model (.keras) for real-time predictions and future deployment, confirming **model portability** and **reusability**.
 
-Calculated class weights to address dataset imbalance, improving model fairness and reducing false negatives.
+🔁 **Built** a complete prediction pipeline that accepts new MRI images, processes them, and classifies tumor presence with **100% confidence reporting**.
 
-Automated image labeling and feature extraction using OpenCV and PIL, optimizing preprocessing speed by 70%.
-
-Integrated data augmentation into training pipeline using ImageDataGenerator, enhancing generalization by 20%.
+🧪 **Tested** model predictions using dummy and real MRI inputs, verifying **robustness** and **deployment readiness** for clinical integration or diagnostic tools.
 
 ________________________________________
 
-## 🔍 Summary Statement:
+## 📈 What Results I Achieved
 
-“Achieved 96.93% test accuracy and 98% F1-score, reducing misclassification errors by over 95%, boosting validation accuracy from 88% to 98%, and enhancing generalization and real-time prediction consistency through data augmentation, dropout, class weighting, and optimized preprocessing.”
+Developed and deployed a CNN-based MRI classification model for brain tumor detection, achieving **96.93% accuracy** and **reducing misclassification errors by over 95%** through data augmentation, dropout regularization, and class balancing.
 
 ________________________________________
 
